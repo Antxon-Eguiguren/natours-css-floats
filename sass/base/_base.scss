@@ -1,0 +1,45 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    // Definimos que 1rem = 10px para nuestro diseño en desktop first. Todas las medidas irán acorde a este valor. Lo hacemos así para poder calcular los rems más fácilmente, solamente diviviendo entre 10. Nuestro default font size es 1.6rem = 16px que lo asignaremos en cada caso
+    font-size: 62.5%;           // 1rem = 10px; 10px/16px = 62.5%
+
+    @include responsive(big-desktop) {  // width > 1800px
+        font-size: 75%;         // 1rem = 12px; 12px/16px = 75%
+    }
+
+    // 1200px - 1800px --> current styles: font-size: 62,5%
+
+    @include responsive(tab-land) {     // width < 1200px
+        font-size: 56.25%;         // 1rem = 9px; 9px/16px = 56.25%
+    }
+
+    @include responsive(tab-port) {     // width < 900px
+        font-size: 50%;         // 1rem = 8px; 8px/16px = 50%
+    }
+
+    // No necesitamos esta media query porque es igual que la de tab-port
+    // @include responsive(phone) {     // width < 600px
+    //     font-size: 50%;         // 1rem = 8px; 8px/16px = 50%
+    // }
+}
+
+body {
+    box-sizing: border-box;
+    padding: 3rem;
+
+    @include responsive(tab-port) {
+        padding: 0;
+    }
+}
+
+::selection {
+    background-color: $color-primary;
+    color: $color-white;
+}

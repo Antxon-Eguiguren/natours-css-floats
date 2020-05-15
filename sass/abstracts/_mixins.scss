@@ -1,0 +1,52 @@
+@mixin clearfix {
+    &::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+}
+
+// MEDIA QUERY MANAGER
+/*
+0px - 600px:        Phone
+600px - 900px:      Tablet (portrait)
+900px - 1200px:     Tablet (landscape)
+1200px - 1800px:    Desktop (current styles, as we make desktop first)
+1800px - ...:       Big desktop
+
+$breakpoint argument choices:
+- phone
+- tab-port
+- tab-land
+- big-desktop
+
+ORDER: Base + Typography --> Layout --> Pages --> Components
+*/
+
+// 1em = 16px
+
+@mixin responsive($breakpoint) {
+    @if ($breakpoint == phone) {
+        @media only screen and (max-width: 37.5em) {        // 600px
+            @content
+        }
+    };
+
+    @if ($breakpoint == tab-port) {         // 900px
+        @media only screen and (max-width: 56.25em) {
+            @content
+        }
+    };
+
+    @if ($breakpoint == tab-land) {         // 1200px
+        @media only screen and (max-width: 75em) {
+            @content
+        }
+    };
+
+    @if ($breakpoint == big-desktop) {      // 1800px
+        @media only screen and (min-width: 112.5em) {
+            @content
+        }
+    };
+}
